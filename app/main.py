@@ -16,15 +16,17 @@ for customer_data in data["customers"]:
 
 shops = [Shop(**shop_data) for shop_data in data["shops"]]
 
-FUEL_PRICE = data["FUEL_PRICE"]
+fuel_price = data["FUEL_PRICE"]
 
 
-def find_nearest_shop(customer: object, shops: list, FUEL_PRICE: float) -> tuple:
+def find_nearest_shop(customer: object,
+                      shops: list,
+                      fuel_price: float) -> tuple:
     min_cost = float("inf")
     nearest_shop = None
     costs = []
     for shop in shops:
-        trip_cost = customer.cost_to_shop(shop.location, FUEL_PRICE, shop)
+        trip_cost = customer.cost_to_shop(shop.location, fuel_price, shop)
         costs.append((shop.name, trip_cost))
         if trip_cost < min_cost:
             min_cost = trip_cost
@@ -34,10 +36,12 @@ def find_nearest_shop(customer: object, shops: list, FUEL_PRICE: float) -> tuple
 
 def shop_trip() -> None:
     for customer in customers:
-        nearest_shop, min_cost, costs = find_nearest_shop(customer, shops, FUEL_PRICE)
+        nearest_shop, min_cost, costs = (
+            find_nearest_shop(customer, shops, fuel_price))
         print(f"{customer.name} has {customer.money} dollars")
         for shop_name, trip_cost in costs:
-            print(f"{customer.name}'s trip to the {shop_name} costs {trip_cost:.2f}")
+            print(f"{customer.name}'s trip to the "
+                  f"{shop_name} costs {trip_cost:.2f}")
 
         product_cost = 0
         for product, quantity in customer.product_cart.items():
@@ -45,7 +49,8 @@ def shop_trip() -> None:
 
         if customer.money < min_cost + product_cost:
             print(
-                f"{customer.name} doesn't have enough money to make a purchase in any shop"
+                f"{customer.name} doesn't have enough money "
+                f"to make a purchase in any shop"
             )
             continue
 
@@ -54,10 +59,11 @@ def shop_trip() -> None:
 
         print(f"Date: {datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')}")
         print(f"Thanks, {customer.name}, for your purchase!")
-        print(f"You have bought:")
+        print("You have bought:")
 
         def format_float(number: float) -> str:
-            formatted_number = ("{:.2f}".format(number)).rstrip("0").rstrip(".")
+            formatted_number = (("{:.2f}".format(number))
+                                .rstrip("0").rstrip("."))
             return formatted_number
 
         for product, quantity in customer.product_cart.items():
@@ -66,7 +72,7 @@ def shop_trip() -> None:
             print(f"{quantity} {product}s for {formatted_price} dollars")
 
         print(f"Total cost is {product_cost} dollars")
-        print(f"See you again!")
+        print("See you again!")
         print()
 
         customer.money -= min_cost
