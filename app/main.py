@@ -19,7 +19,7 @@ shops = [Shop(**shop_data) for shop_data in data["shops"]]
 FUEL_PRICE = data["FUEL_PRICE"]
 
 
-def find_nearest_shop(customer, shops, FUEL_PRICE):
+def find_nearest_shop(customer: object, shops: list, FUEL_PRICE: float) -> tuple:
     min_cost = float("inf")
     nearest_shop = None
     costs = []
@@ -32,7 +32,7 @@ def find_nearest_shop(customer, shops, FUEL_PRICE):
     return nearest_shop, min_cost, costs
 
 
-def shop_trip():
+def shop_trip() -> None:
     for customer in customers:
         nearest_shop, min_cost, costs = find_nearest_shop(customer, shops, FUEL_PRICE)
         print(f"{customer.name} has {customer.money} dollars")
@@ -56,7 +56,7 @@ def shop_trip():
         print(f"Thanks, {customer.name}, for your purchase!")
         print(f"You have bought:")
 
-        def format_float(number):
+        def format_float(number: float) -> str:
             formatted_number = ("{:.2f}".format(number)).rstrip("0").rstrip(".")
             return formatted_number
 
