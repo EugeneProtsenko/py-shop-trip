@@ -2,6 +2,7 @@ import math
 from dataclasses import dataclass
 
 from app.car import Car
+from app.shop import Shop
 
 
 @dataclass
@@ -12,10 +13,10 @@ class Customer:
     location: list
     car: Car
 
-    def distance(self, shop_location) -> float:
+    def distance(self, shop_location: list) -> float:
         return math.dist(self.location, shop_location)
 
-    def cost_to_shop(self, shop_location, fuel_price, shop) -> float:
+    def cost_to_shop(self, shop_location: list, fuel_price: float, shop: Shop) -> float:
         distance_km = self.distance(shop_location)
         fuel_needed = (distance_km / 100) * self.car.fuel_consumption
         fuel_cost = (fuel_needed * fuel_price) * 2

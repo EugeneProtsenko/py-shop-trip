@@ -19,7 +19,7 @@ shops = [Shop(**shop_data) for shop_data in data["shops"]]
 fuel_price = data["FUEL_PRICE"]
 
 
-def find_nearest_shop(customer: object,
+def find_nearest_shop(customer: Customer,
                       shops: list,
                       fuel_price: float) -> tuple:
     min_cost = float("inf")
