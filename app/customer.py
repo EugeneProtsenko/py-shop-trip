@@ -1,8 +1,8 @@
 import math
 from dataclasses import dataclass
 
-from app.car import Car
-from app.shop import Shop
+from .car import Car
+from .shop import Shop
 
 
 @dataclass

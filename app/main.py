@@ -55,6 +55,8 @@ def shop_trip() -> None:
             continue
 
         print(f"{customer.name} rides to {nearest_shop.name}")
+        home_location = customer.location
+        customer.location = nearest_shop.location
         print()
 
         print(f"Date: {datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')}")
@@ -78,6 +80,7 @@ def shop_trip() -> None:
         customer.money -= min_cost
 
         print(f"{customer.name} rides home")
+        customer.location = home_location
         print(f"{customer.name} now has {customer.money:.2f} dollars")
         print()
 
